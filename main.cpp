@@ -42,9 +42,18 @@ void battleFunctionPhysicalAttack() {
     cout << "player inflicts " << enemyDamageTaken << " damage points on enemy" << endl;
     Sleep(1000);
     cout << "the enemy is now at " << newHealth << " health points" << endl;
+    enemyObj.Health = newHealth;
+    if(playerObj.playerHealth <= 0){
+        cout << "you don't have any more health, GAME OVER" << endl;
+        abort();
+    } else if(enemyObj.Health <= 0){
+        cout << "the enemy doesn't have any more health, YOU WIN" << endl;
+        abort();
+    } else {
+        Sleep(2000);
+    }
         
     enemyDamageTaken = 0;
-    enemyObj.Health = newHealth;
 
     Sleep(2000);
     int playerDamageTaken;
@@ -58,6 +67,18 @@ void battleFunctionPhysicalAttack() {
     cout << "enemy inflicts " << playerDamageTaken << " damage points to you" << endl;
     Sleep(1000);
     cout << "you are now at " << playerNewHealth << " health points" << endl;
+    playerObj.playerHealth = playerNewHealth;
+    if(playerObj.playerHealth <= 0){
+        cout << "you don't have any more health, GAME OVER" << endl;
+        abort();
+    } else if(enemyObj.Health <= 0){
+        cout << "the enemy doesn't have any more health, YOU WIN" << endl;
+        abort();
+    } else {
+        Sleep(2000);
+    }
+
+    playerDamageTaken = 0;
     
 }            
         
@@ -75,10 +96,19 @@ void BattleFunctionMagicAttack() {
     cout << "the player inflicts " << enemyMagicDamageTaken << " damage point to enemy" << endl;
     Sleep(1000);
     cout << "the enemy is now at " << newHealth2 << " health points" << endl;
+    enemyObj.Health = newHealth2;
+    if(playerObj.playerHealth <= 0){
+        cout << "you don't have any more health, GAME OVER" << endl;
+        abort();
+    } else if(enemyObj.Health <= 0){
+        cout << "the enemy doesn't have any more health, YOU WIN" << endl;
+        abort();
+    } else {
+        Sleep(2000);
+    }
         
 
     enemyMagicDamageTaken = 0;
-    enemyObj.Health = newHealth2;
 
     bool magicAttack2 = PlaySound(TEXT("magicSoundEffect.wav"), NULL, SND_ASYNC);
     cout << "enemy attacks you with magic.." << endl;
@@ -91,11 +121,19 @@ void BattleFunctionMagicAttack() {
     cout << "the enemy inflicts " << playerMagicDamageTaken << " damage points on you" << endl;
     Sleep(1000);
     cout << "you are now at " << playerObj.playerHealth << " health points" << endl;
+    playerObj.playerHealth = playerNewHealth2;
+    if(playerObj.playerHealth <= 0){
+        cout << "you don't have any more health, GAME OVER" << endl;
+        abort();
+    } else if(enemyObj.Health <= 0){
+        cout << "the enemy doesn't have any more health, YOU WIN" << endl;
+        abort();
+    } else {
+        Sleep(2000);
+    }
         
 
     playerMagicDamageTaken = 0;
-    playerObj.playerHealth = playerNewHealth2;
-    
     
 }
 
@@ -109,28 +147,12 @@ void chooseYourMethodFucntion(){
         cin >> Answer;
         if(Answer == 1){
             battleFunctionPhysicalAttack();
-            if(playerObj.playerHealth <= 0){
-                cout << "you don't have any more health, GAME OVER" << endl;
-                break;
-            } else if(enemyObj.Health <= 0){
-                cout << "the enemy doesn't have any more health, YOU WIN" << endl;
-                break;
-            } else {
-                continue;
-            }
         } else if (Answer == 2){
             BattleFunctionMagicAttack();
-            if(playerObj.playerHealth <= 0){
-                cout << "you don't have any more health, GAME OVER" << endl;
-                break;
-            } else if(enemyObj.Health <= 0){
-                cout << "the enemy doesn't have any more health, YOU WIN" << endl;
-                break;
-            } else {
-                continue;
-            }
+        } else {
+            cout << "command not understood..." << endl;
         }
-    } while(Answer != 1 || 2);
+    } while(playerObj.playerHealth > 0 || enemyObj.Health > 0);
 }
 
 int main() {
