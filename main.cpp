@@ -28,7 +28,6 @@ public:
 
 enemy enemyObj;
 player playerObj;
-int Answer;
 
 void playerStaminaCheckAndRecovery();
 void chooseYourMethod();
@@ -157,13 +156,14 @@ void chooseYourMethod() {
     do {
         cout << "[1]: attack with your sword" << endl;
         cout << "[2]: attack with magic" << endl;
+        string Answer;
         cin >> Answer;
-        if(Answer == 1) {
+        if(Answer == "1") {
             playerStaminaCheckAndRecovery();
             battleFunctionPlayerPhysicalAttack();
             playerObj.playerESP = playerObj.playerESP + 60;
             enemyAttackChoiceFunction();
-        } else if(Answer == 2)  {
+        } else if(Answer == "2")  {
             playerESPCheckAndRecovery();
             battleFunctionPlayerMagicAttack();
             playerObj.playerStamina = playerObj.playerStamina + 60;
@@ -200,4 +200,3 @@ int main() {
     chooseYourMethod();
     return 0;
 }
-
